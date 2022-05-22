@@ -1,0 +1,44 @@
+{{>errores}}
+{{>warning}}
+
+<div class="mainCnt">
+    <h2>{{toolTitle}}</h2>
+
+    <div class="card noBorder">
+    <div class="card-body convertToolsCnt">
+            <label for="convertFile" id="selectFile" class="btn">
+                Select a Video
+            </label>
+
+            <form id="dataForm" action="/tools/videotoaudio" method="post" enctype="multipart/form-data">
+                <input type="file" name="file" id="convertFile" accept=".mkv, .mp4, .avi, .wmv, .mov" size="500000000">{{!--500mb--}}
+                <div>
+                    <label for="formatOp" id="formatOpBtn">Choose a format</label>
+                    {{#if isVideoTool}}
+                        <select name="format" id="formatOp" class="btn">
+                            <option value="mp4">mp4</option>
+                            <option value="avi">avi</option>
+                            <option value="wmv">wmv</option>
+                            <option value="mov">mov</option>
+                            <option value="mkv">mkv</option>
+                        </select>
+                    {{else}}
+                        <select name="format" id="formatOp" class="btn">
+                            <option value="mp3">mp3</option>
+                            <option value="wma">wma</option>
+                            <option value="aac">aac</option>
+                            <option value="ogg">ogg</option>
+                            <option value="flac">flac</option>
+                        </select>
+                    {{/if}}
+                </div>
+
+                <div id="replaceBtn">
+                    <button type="button" class="btn btn-success disabledBtn" id="convertBtn">Convert to Audio</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="/js/convertTools.js"></script>

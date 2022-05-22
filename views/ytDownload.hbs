@@ -1,0 +1,70 @@
+{{>errores}}
+{{>warning}}
+<div class="mainCnt">
+    <h2 id="titlePage" class="transition">{{toolTitle}}</h2>
+
+    <div class="reqNresCnt">
+        <div class="reqNres transition">
+            {{!--Parte para ingresar el url--}}
+            <div>
+                <div class="mb-3">
+                <label for="url" class="form-label">Video Url</label>
+                <input type="url" class="form-control" id="url" placeholder="Ej:https://www.youtube.com/...">
+                </div>
+                <button type="button" id="reqButton" class="btn btn-success" disabled>Comenzar</button>
+            </div>
+
+            {{!--Parte para mostrar la informacion--}}
+            <div>
+                <div class="card mb-3 infoVideoCnt diseabled">
+                    <div class="row g-0">
+                        <div class="col-md-4 thumbnail">
+                            <img id="thumbnail" src="..." class="img-fluid rounded-start" alt="Load Image...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body infoVideoReq">
+                                <h5 class="card-title" id="VideoTitle">Video Title</h5>
+                                <p class="card-text" id="author">Athor:</p>
+                                <p class="card-text" id="category">Category:</p>
+                                <p class="card-text" id="duration">Duration:</p>
+                                <div class="btnCnt"> 
+                                    {{#if isVideoTool}}
+                                        <select name="formatOp" id="formatOp" class="btn formatOpV">
+                                            <option value="mp4">mp4</option>
+                                            <option value="avi">avi</option>
+                                            <option value="wmv">wmv</option>
+                                            <option value="mov">mov</option>
+                                            <option value="mkv">mkv</option>
+                                        </select>
+
+                                        <select name="calidadOp" id="calidadOp" class="btn formatOpV"></select>
+                                    {{else}}
+                                        <input type="hidden" name="calidadOp" id="calidOp">
+                                        <select name="formatOp" id="formatOp" class="btn">
+                                            <option value="mp3">mp3</option>
+                                            <option value="wma">wma</option>
+                                            <option value="aac">aac</option>
+                                            <option value="ogg">ogg</option>
+                                            <option value="flac">flac</option>
+                                        </select>
+                                    {{/if}}
+                                    <button class="btn formatOpV" id="preDownloadBtn">Listo</button>
+
+                                    <a class="btn formatOpV" id="downloadBtn">Download</a>
+                                    <a class="btn formatOpV" id="downloadOther">Download other</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+{{!--Scripts--}}
+<script src="/js/downloadTools.js"></script>

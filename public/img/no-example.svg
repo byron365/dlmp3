@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="412.82275mm"
+   height="200.58827mm"
+   viewBox="0 0 412.82275 200.58827"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.2 (1:1.1+202202050950+0a00cf5339)"
+   sodipodi:docname="no-example.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#111111"
+     borderopacity="1"
+     inkscape:pageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:zoom="0.16441125"
+     inkscape:cx="291.95082"
+     inkscape:cy="-118.60502"
+     inkscape:window-width="1366"
+     inkscape:window-height="712"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer3" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Fondo"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(18.257238,-49.049591)">
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke-width:0.801983;stroke-linecap:round;stroke-linejoin:round"
+       id="rect846"
+       width="200.58827"
+       height="412.82275"
+       x="-249.63786"
+       y="-18.257238"
+       rx="11.779589"
+       ry="19.499105"
+       transform="rotate(-90)" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="icon"
+     transform="translate(18.257238,-49.049591)" />
+  <g
+     inkscape:groupmode="layer"
+     id="layer3"
+     inkscape:label="text"
+     transform="translate(18.257238,-49.049591)">
+    <g
+       id="g25361"
+       transform="translate(0,0.60529489)">
+      <path
+         d="m 227.82362,139.50315 h -63.47117 c -4.38183,0 -7.9339,3.55207 -7.9339,7.9339 v 42.31411 c 0,4.38183 3.55207,7.9339 7.9339,7.9339 h 63.47117 c 4.38182,0 7.9339,-3.55207 7.9339,-7.9339 v -42.31411 c 0,-4.38183 -3.55373,-7.9339 -7.9339,-7.9339 z m -50.39677,10.57853 c 2.92232,0 5.28926,2.3686 5.28926,5.28926 0,2.92067 -2.21487,5.28927 -5.28926,5.28927 -2.92067,0 -5.28926,-2.3686 -5.28926,-5.28927 0,-2.92066 2.5124,-5.28926 5.28926,-5.28926 z m 44.79345,35.63642 c -0.4628,0.8595 -1.35537,1.38843 -2.33058,1.38843 h -47.60337 c -0.99554,0 -1.90579,-0.55852 -2.35703,-1.44629 -0.45124,-0.8871 -0.36612,-1.95206 0.22016,-2.75703 l 11.57027,-15.86779 c 0.5005,-0.68926 1.29389,-1.08595 2.13686,-1.08595 0.8448,0 1.63902,0.40347 2.13719,1.08661 l 3.69423,5.06778 10.37026,-15.5554 c 0.3438,-0.73124 1.17025,-1.17752 2.19504,-1.17752 0.88398,0 1.7091,0.44166 2.20001,1.17769 l 17.63639,26.44632 c 0.5438,0.80579 0.59339,1.84711 0.13057,2.72315 z m -6.29752,19.90085 H 160.3855 c -6.56199,0 -11.90084,-5.33885 -11.90084,-11.90084 v -39.66948 c 0,-2.18183 -1.77687,-3.96695 -3.96695,-3.96695 -2.19009,0 -3.96695,1.78512 -3.96695,3.96695 v 39.66948 c 0,10.94217 8.89753,19.83474 19.83474,19.83474 h 55.53728 c 2.19008,0 3.96694,-1.77686 3.96694,-3.96695 0,-2.19008 -1.76859,-3.96695 -3.96694,-3.96695 z"
+         id="path1106"
+         style="stroke-width:0.165289" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+         x="7.3994474"
+         y="100.08566"
+         id="text3021"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.5778px;font-family:Arial;-inkscape-font-specification:'Arial, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583"
+           x="7.3994474"
+           y="100.08566"
+           id="tspan9545"
+           sodipodi:role="line">Trabajamos en un buen ejemplo...</tspan></text>
+    </g>
+  </g>
+</svg>
