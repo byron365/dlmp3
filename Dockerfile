@@ -1,5 +1,5 @@
 # Set the base image to Ubuntu
-FROM node:latest
+FROM --platform=linux/amd64 node:latest
 
 # Instalando cosas necesarias del sistema
 RUN apt-get -y update; 
