@@ -19,7 +19,6 @@ var upload = multer({ storage: storage }).single('file');
 
 //Rutas para servir frontend
 router.get('/yttoaudio', (req,res)=>{
-    
     res.render('ytDownload',{'toolTitle':'Youtube to Audio', 'isVideoTool':false})
 })
 
@@ -32,11 +31,11 @@ router.get('/videotoaudio', (req, res)=>{
 })
 
 router.get('/videotovideo', (req, res)=>{
-    res.render('fileConvert', {'toolTitle': 'Video to Video'});
+    res.render('fileConvert', {'toolTitle': 'Video to Video', 'isVideoTool':true});
 })
 
 router.get('/audiotoaudio', (req, res)=>{
-    res.render('fileConvert', {'toolTitle': 'Audio to Audio'});
+    res.render('fileConvert', {'toolTitle': 'Audio to Audio','isVideoTool':false});
 })
 
 //Ruta para enviar informacion del video apartir de la url
@@ -44,7 +43,7 @@ router.post('/getinfo', async (req, res)=>{
     let info = {}
     let errors = [];
     let {url} = req.body;
-    console.log(url);
+    //console.log(url);
 
     await dlFunctions.GetInfo(url)
     .then(data =>{
@@ -121,11 +120,11 @@ router.post('/dlAudio', async (req, res) =>{
                 //Estado de la descarga
                 y = setInterval(()=>{
                     if(!dlFunctions.AdlStatus.AudioDl.isComplete){
-                        console.log(dlFunctions.AdlStatus.AudioDl.percentComplete + "% descargado");
+                       // console.log(dlFunctions.AdlStatus.AudioDl.percentComplete + "% descargado");
                     }else{
                         console.log('Se completo la descarga del audio');
                         if(!dlFunctions.AdlStatus.fileConvert.isComplete){
-                            console.log(dlFunctions.AdlStatus.fileConvert.percentComplete + "% convertido");
+                            //console.log(dlFunctions.AdlStatus.fileConvert.percentComplete + "% convertido");
                         }else{
                             console.log('Se completo la conversion del audio');
                         }
@@ -137,7 +136,7 @@ router.post('/dlAudio', async (req, res) =>{
                 },200)
                 await dlFunctions.DlVideoNAudio(url, dir, format, '')
                 .then(v =>{
-                    console.log(v.msg)
+                    //console.log(v.msg)
                     data.name = v.fileName.replaceAll('/', '');
                 }).catch(e => errors.push({error:e}));
             }
@@ -182,11 +181,11 @@ router.post('/dlVideo', async (req, res) =>{
                 //Estado de la descarga
                 y = setInterval(()=>{
                     if(!dlFunctions.VdlStatus.VideoDl.isComplete){
-                        console.log(dlFunctions.VdlStatus.VideoDl.percentComplete + "% descargado");
+                       // console.log(dlFunctions.VdlStatus.VideoDl.percentComplete + "% descargado");
                     }else{
                         console.log('Se completo la descarga del audio');
                         if(!dlFunctions.VdlStatus.fileConvert.isComplete){
-                            console.log(dlFunctions.VdlStatus.fileConvert.percentComplete + "% convertido");
+                           // console.log(dlFunctions.VdlStatus.fileConvert.percentComplete + "% convertido");
                         }else{
                             console.log('Se completo la conversion del audio');
                         }
@@ -199,14 +198,14 @@ router.post('/dlVideo', async (req, res) =>{
 
                 await dlFunctions.DlVideoNAudio(url, destino, format, calidad)
                 .then(async v => {
-                    console.log(v.msg);
+                    //console.log(v.msg);
                     data.name = v.fileName.replaceAll('/', '');
                     let input = `${destino}Audio${v.fileName}.mp4`;
                     let output = `${destino}Audio${v.fileName}.mp3`;
 
                     //Convirtiendo audio y uniendo en caso de que esten separados
                     await dlFunctions.ConvertMedia(input, output, dlFunctions.VdlStatus).then(async c => {
-                        console.log(c); //Se convirtieron los archivos
+                        //console.log(c); //Se convirtieron los archivos
                         if(fs.existsSync(`${destino}${v.fileName}.${format}`)){
                             fs.rename(`${destino}${v.fileName}.${format}`,`${destino}Video${v.fileName}.${format}`)
                         }
@@ -216,7 +215,7 @@ router.post('/dlVideo', async (req, res) =>{
 
                         await  dlFunctions.MargeMedia(videoInput, audioInput, videoOutput)
                         .then(async m => {
-                            console.log(m);
+                            //console.log(m);
                         })
                         .catch(e => errors.push({error:'Ocurrio un error al descargar el video'}));
                     })
@@ -273,7 +272,7 @@ router.post('/uploadfile', async (req, res)=>{
         data.originalname = originalname.replace(path.extname(originalname),'');
         data.id = filename;
 
-        console.log(req.file);
+        //console.log(req.file);
 
         if(errors.length > 0){
             //Hay errores
@@ -300,12 +299,12 @@ router.post('/convertfile', async (req, res)=>{
     }
     let y;
 
-    console.log(req.body);
+    //console.log(req.body);
     //Estado de la conversion
     if(format && originalname && id){
         y = setInterval(()=>{
             if(!convertStatus.fileConvert.isComplete){
-                console.log(convertStatus.fileConvert.percentComplete + "% convertido");
+                //console.log(convertStatus.fileConvert.percentComplete + "% convertido");
             }else{
                 console.log('Se completo la conversion del archivo');
             }
@@ -314,13 +313,13 @@ router.post('/convertfile', async (req, res)=>{
                 clearInterval(y);
             }
         },200)
-        console.log(originalname)
+        //console.log(originalname)
         //mostrando progreso
         
         //Convirtiendo archivo
         await dlFunctions.ConvertMedia(input, dest, convertStatus)
         .then(v=>{
-            console.log(v);
+            //console.log(v);
             if(fs.existsSync(input)){
                 fs.unlink(input);
             }
@@ -381,6 +380,7 @@ router.get('/downloadFile/:name/:format/:isVideo/:isConvertFile', (req,res)=>{
     if(errors.length > 0){
         res.send(errors[0])
     }else{
+        console.log("la carpeta es: " +dir)
         res.download(dir);
     }
 })
@@ -389,8 +389,8 @@ router.get('/downloadFile/:name/:format/:isVideo/:isConvertFile', (req,res)=>{
 router.delete('/deleteFile/:name/:format/:isVideo', async (req, res)=>{
     let {name, format, isVideo} = req.params;
     let dir = '';
-    console.log(isVideo);
-    console.log(format);
+    //console.log(isVideo);
+    //console.log(format);
 
     //Localizando archivo
     if(fs.existsSync(path.join(__dirname, `../dlVideos/${name}.${format}`))){
@@ -404,7 +404,7 @@ router.delete('/deleteFile/:name/:format/:isVideo', async (req, res)=>{
         dir = path.join(__dirname, `../convertFiles/${name}.${format}`)
     }
     
-    console.log(dir)
+    //console.log(dir)
     if(fs.existsSync(dir)){
         await fs.unlink(dir)
         .then(v =>{
@@ -417,8 +417,8 @@ router.delete('/deleteFile/:name/:format/:isVideo', async (req, res)=>{
 })
 
 //Limpiando
-//Cada hora eliminara los archivos que tengan mas de media hora
-cleanUp.CleanUpStart([path.join(__dirname, '../dlAudios/'),path.join(__dirname, '../dlVideos/')], 3.6e6, 1.8e6);
+//Cada hora eliminara los archivos que tengan mas de 15 min hora y se revisara cada 10 min
+cleanUp.CleanUpStart([path.join(__dirname, '../dlAudios/'),path.join(__dirname, '../dlVideos/'),path.join(__dirname, '../convertFiles/')], 60000, 300000);
 
 
 module.exports = router;

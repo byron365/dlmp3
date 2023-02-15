@@ -7,6 +7,7 @@ let dataForm = document.getElementById('dataForm');
 let alertCnt = document.getElementById('alertCnt');
 let errorText = document.getElementById('errorText');
 let replaceBtn = document.getElementById('replaceBtn');
+let processingLabel = document.getElementById('processingLabel');
 let btnStatus = 0; //Servira para controla los estados del boton de accion, al inicio sera 0, 1 para descargar el archivo 2 para convertir otro
 
 //Eventos del boton de formatos
@@ -41,6 +42,7 @@ convertBtn.addEventListener('click', async ()=>{
     if(btnStatus == 0){
         //estado inicial
         //Mostrando mensaje 
+        isLoading(true,processingLabel,2500);
         convertBtn.innerHTML = 'Uploading...';
         convertBtn.style.backgroundColor = '#ff9f1a';
         convertBtn.disabled = true;
@@ -61,6 +63,7 @@ convertBtn.addEventListener('click', async ()=>{
         }).then(async res => {
             if(res.status == 500){
                 alertCnt.style.visibility = 'visible';
+                isLoading(false,processingLabel,2500);
                 errorText.innerHTML = `<strong>Error!</strong> ${res.statusText}. Please try <a href="/tools/videotoaudio">again</a>`
             }
             //Cambiando mensaje
@@ -71,7 +74,7 @@ convertBtn.addEventListener('click', async ()=>{
                 //console.log(v)
                 //Reuniendo datos
                 let data = v;
-                console.log(data)
+                //console.log(data)
 
                 //Haciendo peticion para convertir archivo
                 await fetch('/tools/convertfile',{
@@ -88,11 +91,12 @@ convertBtn.addEventListener('click', async ()=>{
                     body: JSON.stringify(data)
                 }).then(async res =>{
                     await res.json().then(c =>{
-                        console.log(c);
+                        //console.log(c);
                         dataResponse = c;
                         //Errores
                         if(c.error){
                             alertCnt.style.visibility = 'visible';
+                            isLoading(false,processingLabel,2500);
                             errorText.innerHTML = `<strong>Error!</strong> ${c.error[0]}. Please try <a href="/tools/videotoaudio">again</a>`
                         }
 
@@ -100,17 +104,20 @@ convertBtn.addEventListener('click', async ()=>{
                         replaceBtn.innerHTML = `<a class="btn btn-success disabledBtn linkStyle" id="convertBtn" href="/tools/downloadFile/${dataResponse.originalname}/${dataResponse.format}/false/true">Download file</a>`
                         convertBtn.style.backgroundColor = '';
                         convertBtn.disabled = false;
+                        isLoading(false,processingLabel,2500);
                         btnStatus = 1;//Se habilitara la peticion de descargar
                     })
                 }).catch(e => {
                     alertCnt.style.visibility = 'visible';
+                    isLoading(false,processingLabel,2500);
                     errorText.innerHTML = `<strong>Error</strong> Something wrong!. Please try <a href="/tools/videotoaudio">again</a>`
                 })
             })
             
         })
         .catch(error => {
-            console.log(error)
+            //console.log(error)
+            isLoading(false,processingLabel,2500);
             alertCnt.style.visibility = 'visible';
             errorText.innerHTML = `<strong>Error</strong> ${error.error}. Please try <a href="/tools/videotoaudio">again</a>`
         });
@@ -119,6 +126,7 @@ convertBtn.addEventListener('click', async ()=>{
         //Cambiando mensaje
         replaceBtn.innerHTML = `<a class="btn btn-success disabledBtn linkStyle" id="convertBtn" href="/tools/deleteFile/${dataResponse.originalname}/${dataResponse.format}/false/true">Download file</a>`
         convertBtn.style.backgroundColor = '#ff3838';
+        isLoading(true,processingLabel,2500);
         btnStatus = 2;
         
     }else if(btnStatus == 2){
@@ -136,3 +144,50 @@ convertBtn.addEventListener('click', async ()=>{
 alertCnt.children[1].addEventListener('click', ()=>{
     alertCnt.style.visibility = 'hidden';
 })
+
+//Funcion para area de carga
+let anCicle;
+let currentTitle = processingLabel.innerHTML;
+let anCount = 0;
+function isLoading(activar ,tagElement, durationMsec){
+    if(activar){
+        anCicle= setInterval(()=>{
+            tagElement.parentNode.style.visibility = "visible";
+            tagElement.style.animationDuration = '2.5s';
+            tagElement.style.animationName = 'headShake';
+            tagElement.style.animationIterationCount = 'infinite';
+            if(anCount == 0){
+            //Primera animacion
+                tagElement.innerHTML = 'Converting...';
+                anCount = 1;
+            }else if(anCount == 1){
+                //Segunda animacion
+                if(currentTitle.includes('Video')){
+                    tagElement.innerHTML = 'Wait a few minutes...';
+                }else{
+                    tagElement.innerHTML = 'Wait a few seconds...';
+                }
+                
+                anCount = 2;
+            }else{
+            //Tercera animacion
+                tagElement.innerHTML = currentTitle;
+                anCount = 0;
+            }
+        },durationMsec)
+    }else{
+        tagElement.innerHTML = 'Finished';
+        tagElement.style.color = 'green';
+        anCount = 0;
+        setTimeout(()=> {
+            tagElement.innerHTML = currentTitle;
+            tagElement.style.animationIterationCount = '';
+            tagElement.style.animationDuration = '';
+            tagElement.style.animationName = '';
+            tagElement.style.color = '';
+            tagElement.parentNode.style.visibility = "";
+        },2000)
+        
+        clearInterval(anCicle);
+    }
+}

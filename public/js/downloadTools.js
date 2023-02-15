@@ -20,6 +20,7 @@ let calidadOp = document.getElementById('calidadOp');
 
 let titlePage = document.getElementById('titlePage');
 let infoVideoCnt = document.getElementsByClassName('infoVideoCnt');
+let processingLabel = document.getElementById('processingLabel');
 
 //Eventos del input
 let isOnReq = false;
@@ -62,7 +63,7 @@ reqButton.addEventListener('click', async ()=>{
         data = {'url': url.value}
         reqButton.disabled = true;
         isOnReq = true;
-        isLoading(true, titlePage, 2500);
+        isLoading(true,processingLabel,2500);
         var res = await reqFunction('/tools/getinfo', 'POST', data)
         .then(v =>{
             //console.log(v);
@@ -71,10 +72,12 @@ reqButton.addEventListener('click', async ()=>{
                 isOnReq = false;
                 alertCnt.style.visibility = 'visible';
                 errorText.innerHTML = `<strong>Error!</strong> ${v.errors[0].error}`;
-                isLoading(false,titlePage,2500);
+    
+                isLoading(false,processingLabel,2500);
             }else{
                 //Mostrando informacion
-                isLoading(false,titlePage,2500);
+    
+                isLoading(false,processingLabel,2500);
                 if(v.info.isLiveContent){
                     warningCnt.style.visibility = 'visible';
                     warningMsg.innerHTML = `<strong>Is a Live!</strong> \nWhen the live ends, you can download it <a href="/tools/yttoaudio">Try other</a>`;
@@ -102,7 +105,8 @@ reqButton.addEventListener('click', async ()=>{
 
             }
         }).catch(e =>{
-            isLoading(false,titlePage,2500);
+
+            isLoading(false,processingLabel,2500);
             isOnReq = false;
             alertCnt.style.visibility = 'visible';
             if(location.href.includes('yttovideo')){
@@ -141,7 +145,8 @@ preDownloadBtn.addEventListener('click', ()=>{
         ruta = "/tools/dlVideo";
         data.calidad = calidadOp.value;
     }
-    isLoading(true,titlePage,2500);
+
+    isLoading(true,processingLabel,2500);
 
     reqFunction(ruta, 'POST', data)
     .then(v =>{
@@ -149,10 +154,12 @@ preDownloadBtn.addEventListener('click', ()=>{
             //Hay errores
             alertCnt.style.visibility = 'visible';
             errorText.innerHTML = `<strong>Error!</strong> ${v.errors[0].error}`;
-            isLoading(false,titlePage,2500);
+
+            isLoading(false,processingLabel,2500);
         }else{
             //console.log(v);
-            isLoading(false,titlePage,2500);
+
+            isLoading(false,processingLabel,2500);
             preDownloadBtn.style.display = 'none';
             formatOp.style.display = 'none';
             downloadBtn.style.display = 'inline-block';
@@ -166,7 +173,7 @@ preDownloadBtn.addEventListener('click', ()=>{
             data.name = v.name;
         }
     }).catch(e =>{
-        isLoading(false,titlePage,2500);
+        isLoading(false,processingLabel,2500);
         alertCnt.style.visibility = 'visible';
         if(location.href.includes('yttovideo')){
             errorText.innerHTML = `<strong>Error!</strong> Something is wrong, please try <a href="/tools/yttovideo">again</a>`;
@@ -192,7 +199,7 @@ downloadOther.addEventListener('click', ()=>{
     }
     reqFunction(ruta, 'DELETE', data)
     .then(v =>{
-        console.log(v.msg);
+        //console.log(v.msg);
         location.reload();
     })
 })
@@ -232,9 +239,10 @@ let anCount = 0;
 function isLoading(activar ,tagElement, durationMsec){
     if(activar){
         anCicle= setInterval(()=>{
+            tagElement.parentNode.style.visibility = "visible";
             tagElement.style.animationDuration = '2.5s';
             tagElement.style.animationName = 'headShake';
-            titlePage.style.animationIterationCount = 'infinite';
+            tagElement.style.animationIterationCount = 'infinite';
             if(anCount == 0){
             //Primera animacion
                 tagElement.innerHTML = 'Loading...';
@@ -260,10 +268,11 @@ function isLoading(activar ,tagElement, durationMsec){
         anCount = 0;
         setTimeout(()=> {
             tagElement.innerHTML = currentTitle;
-            titlePage.style.animationIterationCount = '';
+            tagElement.style.animationIterationCount = '';
             tagElement.style.animationDuration = '';
             tagElement.style.animationName = '';
             tagElement.style.color = '';
+            tagElement.parentNode.style.visibility = "";
         },2000)
         
         clearInterval(anCicle);

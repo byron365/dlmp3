@@ -1,5 +1,6 @@
 {{>errores}}
 {{>warning}}
+{{>processingScreen text=toolTitle}}
 
 <div class="mainCnt">
     <h2>{{toolTitle}}</h2>
@@ -11,7 +12,11 @@
             </label>
 
             <form id="dataForm" action="/tools/videotoaudio" method="post" enctype="multipart/form-data">
-                <input type="file" name="file" id="convertFile" accept=".mkv, .mp4, .avi, .wmv, .mov" size="500000000">{{!--500mb--}}
+                {{#if isVideoTool}}
+                    <input type="file" name="file" id="convertFile" accept=".mkv, .mp4, .avi, .wmv, .mov" size="500000000">{{!--500mb--}}
+                {{else}}
+                <input type="file" name="file" id="convertFile" accept=".mp3, .wma, .aac, .ogg, .flac" size="500000000">{{!--500mb--}}
+                {{/if}}
                 <div>
                     <label for="formatOp" id="formatOpBtn">Choose a format</label>
                     {{#if isVideoTool}}

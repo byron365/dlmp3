@@ -16,6 +16,7 @@ function CleanUp (filePaths = [], destroyTime){
 
         //Comprobando por cada archivo si existe
         arrayFiles.map(async f =>{
+            //console.log("fecha Actual: " + fechaActual + " duracion: " + fechaActual - fechaArchivo + " tiempo limite: " + limitTime)
             fechaArchivo = await fs.statSync(`${fp}/${f}`).mtimeMs;
             if((fechaActual - fechaArchivo) >= limitTime){
                 //Es mayor al tiempo limite se elimina
@@ -36,7 +37,7 @@ function CleanUpStart(filePaths = [], freqTime, limitTime ){
     */
     y = setInterval(()=>{
         CleanUp(filePaths, limitTime);
-        console.log('Se hizo limpieza')
+        //console.log('Se hizo limpieza')
     }, freqTime)
 }
 

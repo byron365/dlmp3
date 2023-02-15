@@ -7,26 +7,26 @@
    viewBox="0 0 512 512"
    version="1.1"
    id="svg5"
-   inkscape:version="1.1.1 (1:1.1+202109281949+c3084ef5ed)"
    sodipodi:docname="ruedaCarga.svg"
+   inkscape:version="1.2.2 (1:1.2.2+202212051550+b0a8486541)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
   <sodipodi:namedview
-     id="namedview7"
+     id="namedview10"
      pagecolor="#ffffff"
      bordercolor="#111111"
      borderopacity="1"
-     inkscape:pageshadow="0"
+     inkscape:showpageshadow="0"
      inkscape:pageopacity="0"
      inkscape:pagecheckerboard="1"
-     inkscape:document-units="px"
+     inkscape:deskcolor="#d1d1d1"
      showgrid="false"
-     inkscape:zoom="1.28"
-     inkscape:cx="253.90625"
-     inkscape:cy="238.67188"
+     inkscape:zoom="1.03125"
+     inkscape:cx="104.24242"
+     inkscape:cy="257.45455"
      inkscape:window-width="1366"
      inkscape:window-height="712"
      inkscape:window-x="0"
@@ -36,50 +36,35 @@
   <defs
      id="defs2">
     <linearGradient
-       id="3"
-       inkscape:swatch="gradient">
+       id="3">
       <stop
          style="stop-color:#c56cf0;stop-opacity:1;"
-         offset="0"
+         offset="0.14678736"
          id="stop1559" />
       <stop
-         style="stop-color:#000000;stop-opacity:0;"
-         offset="1"
+         style="stop-color:#ffffff;stop-opacity:0.50588232;"
+         offset="0.50607127"
+         id="stop915" />
+      <stop
+         style="stop-color:#c56cf0;stop-opacity:1;"
+         offset="0.92422688"
          id="stop1561" />
     </linearGradient>
     <linearGradient
-       inkscape:collect="always"
        xlink:href="#3"
        id="linearGradient1573"
        gradientUnits="userSpaceOnUse"
        x1="101.20312"
        y1="255.77049"
        x2="410.86523"
-       y2="255.77049" />
+       y2="255.77049"
+       gradientTransform="matrix(1.6607557,0,0,1.6607557,-168.63692,-168.4627)" />
   </defs>
   <g
-     inkscape:label="Fondo"
-     inkscape:groupmode="layer"
-     id="layer1"
-     sodipodi:insensitive="true"
-     style="display:none">
-    <rect
-       style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:0.962275;stroke-linecap:round;stroke-linejoin:round"
-       id="rect846"
-       width="507.65662"
-       height="506.72687"
-       x="2.2063172"
-       y="2.4071922"
-       rx="10.130984"
-       ry="9.1399965" />
-  </g>
-  <g
-     inkscape:groupmode="layer"
-     id="layer2"
-     inkscape:label="Rueda">
+     id="layer2">
     <path
        id="path1295"
-       style="mix-blend-mode:normal;fill:url(#linearGradient1573);fill-opacity:1;stroke:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="M 256.03516,103.43945 A 152.3306,152.3306 0 0 0 103.70312,255.77148 152.3306,152.3306 0 0 0 256.03516,408.10156 152.3306,152.3306 0 0 0 408.36523,255.77148 152.3306,152.3306 0 0 0 256.03516,103.43945 Z m 0,38.77735 A 113.55473,113.55473 0 0 1 369.58984,255.77148 113.55473,113.55473 0 0 1 256.03516,369.32617 113.55473,113.55473 0 0 1 142.48047,255.77148 113.55473,113.55473 0 0 1 256.03516,142.2168 Z" />
+       style="mix-blend-mode:normal;fill:url(#linearGradient1573);fill-opacity:1;stroke:none;stroke-width:4.98226;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 256.57496,3.3249696 A 252.98393,252.98393 0 0 0 3.5886396,256.31128 252.98393,252.98393 0 0 0 256.57496,509.29435 252.98393,252.98393 0 0 0 509.55802,256.31128 252.98393,252.98393 0 0 0 256.57496,3.3249696 Z m 0,64.3997104 A 188.58668,188.58668 0 0 1 445.16157,256.31128 188.58668,188.58668 0 0 1 256.57496,444.8979 188.58668,188.58668 0 0 1 67.98835,256.31128 188.58668,188.58668 0 0 1 256.57496,67.72468 Z" />
   </g>
 </svg>

@@ -147,7 +147,7 @@ function ProcessMultiFileDownload(infor, pos, urls, save, formato, calidad){
         var informe = infor;
         var sound;
 
-        console.log('Descargando cancion ' + (position + 1));
+        //console.log('Descargando cancion ' + (position + 1));
         sound= DlVideoNAudio(urls[position], save, formato, calidad);
 
         sound.then(async v => {
@@ -201,7 +201,7 @@ function ProcessGetInfo(url){
                 resolve(values)
             })
             .catch(e => {
-                console.log(e);
+                //console.log(e);
                 reject(e);
             });
         }else{
@@ -292,7 +292,7 @@ function ProcessDlVideo(url, saveOut, format, quality){
                                 console.log('Comenzando la descarga del audio');
                             });
                             audio.on('end', () => {
-                                console.log('Se termino la descarga del audio');
+                                //console.log('Se termino la descarga del audio');
                             });
                             video = ytdl(url, {quality: calidad});
                             video.pipe(fs.createWriteStream(`${saveOut}Video${info.title}.mp4`));
@@ -376,7 +376,7 @@ function ProcessDlVideo(url, saveOut, format, quality){
                     audio.pipe(fs.createWriteStream(`${saveOut}Audio${info.title}.mp4`));
                     audio.once('response', () => {
                         starttime = Date.now();
-                        console.log('Comenzando la descarga del video');
+                        console.log('Comenzando la descarga del audio');
                     });
                     audio.on('progress', (chunkLength, downloaded, total) => {
                         //mostrando el progreso de la descarga por consola
@@ -401,7 +401,7 @@ function ProcessDlVideo(url, saveOut, format, quality){
                         if (format == 'mp3') {
                             ConvertMedia(`${saveOut}Audio${info.title}.mp4`, `${saveOut}Audio${info.title}.${format}`, AdlStatus)
                             .then(async c => {
-                                console.log('Añadiendo la imagen');
+                                //console.log('Añadiendo la imagen');
                                 //Descargando la imagen para luego agregarla
                                 let optionsImg = {
                                     url: info.thumbnails[info.thumbnails.length - 1].url,
@@ -410,11 +410,11 @@ function ProcessDlVideo(url, saveOut, format, quality){
                                 
                                await dlImg.image(optionsImg)
                                 .then(async ({ filename }) => {
-                                    console.log('Se guardo la imagen');
+                                   // console.log('Se guardo la imagen');
 
                                    await webpConvert.dwebp(`${filename.replaceAll(' ','')}`, `${filename.replace('.webp', '.jpg').replaceAll(' ','')}`, "-o", logging = "-v")
                                     .then(save => {
-                                        console.log('Se convirtio la imagen');
+                                        //console.log('Se convirtio la imagen');
 
                                         if(fs.existsSync(`${filename.replace('.webp', '.jpg').replaceAll(' ','')}`)){
                                             //ffmpeg -i input.mp3 -i cover.jpg -map_metadata 0 -map 0 -map 1 output.mp3
@@ -425,7 +425,7 @@ function ProcessDlVideo(url, saveOut, format, quality){
                                             '-map_metadata', '0', '-map', '0', 
                                             '-map', '1', `${saveOut}${info.title}.${format}`])
                                             .on('close',()=>{
-                                                console.log('Se añadio la imagen a la pista');
+                                                //console.log('Se añadio la imagen a la pista');
                                                 if(fs.existsSync(`${saveOut}Audio${info.title}.${format}`)){
                                                     fs.unlink(`${saveOut}Audio${info.title}.${format}`)
                                                     if (fs.existsSync(filename)) {
@@ -569,7 +569,7 @@ async function ConvertMedia(inputPath, outputPath, saveStatus){
 function ProcessesMargeMedia(videoInput, audioInput, output){
     return new Promise(async (resolve, reject) =>{
         //ffmpeg -i video.mp4 -i audio.m4a -c:v copy -c:a copy output.mp4
-        console.log('Uniendo archivos');
+       // console.log('Uniendo archivos');
         cp.spawn('ffmpeg', ['-i', videoInput, '-i', audioInput, '-c:v', 'copy', '-c:a', 'copy', output])
         .once('close', () =>{
             fs.unlink(videoInput).then(v =>{
@@ -589,6 +589,32 @@ function ProcessesMargeMedia(videoInput, audioInput, output){
 async function MargeMedia(videoInput, audioInput, output){
     let data = await ProcessesMargeMedia(videoInput, audioInput, output);
     return data;
+}
+
+//La siguiente funcion se encarga de crear un hash apartir de un texto ingresado
+const hashCreate = (text = '')=>{
+    letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
+    letters = letters.split("");
+
+    let input = text.split("")
+    let output = [];
+
+    input.map(inl =>{
+        letters.map((letter,i) =>{
+            if(inl == letter){
+                output.push(i)
+            }
+        })
+    })
+
+    return output.toString().replaceAll(",","")
+}
+
+//Funcion para limpiar nombre de caracteres
+const wipeName = (text) =>{
+    let newText;
+    newText = text.replaceAll('"', '').replaceAll("/","").replaceAll('|',"").replaceAll('“','').replaceAll('”','');
+    return newText
 }
 
 module.exports = {
