@@ -417,8 +417,8 @@ router.delete('/deleteFile/:name/:format/:isVideo', async (req, res)=>{
 })
 
 //Limpiando
-//Cada hora eliminara los archivos que tengan mas de 15 min hora y se revisara cada 10 min
-cleanUp.CleanUpStart([path.join(__dirname, '../dlAudios/'),path.join(__dirname, '../dlVideos/'),path.join(__dirname, '../convertFiles/')], 60000, 300000);
+//Cada hora eliminara los archivos que tengan mas de 5 min hora y se revisara cada 10 min
+cleanUp.CleanUpStart([path.join(__dirname, '../dlAudios/'),path.join(__dirname, '../dlVideos/'),path.join(__dirname, '../convertFiles/')], 300000, 900000);
 
 
 module.exports = router;

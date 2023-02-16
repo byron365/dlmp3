@@ -134,14 +134,14 @@ footer{
     height: 100%;
 }
 #replaceBtn{
-    width: 50%;
+    width: 100%;
     background-color: transparent;
 }
 .convertToolsCnt form{
     width: 80%;
     margin: 1.5rem auto;
-    display: flex;
-    flex-wrap: nowrap;
+    display: grid;
+    grid-template-columns: auto auto;
     justify-content: center;
 }
 .convertToolsCnt form div{
@@ -258,7 +258,7 @@ nav{
        overflow: auto;
     }
 }
-@media screen and (max-width:600px){
+@media screen and (max-width:660px){
     .toolsCnt{
         grid-template-columns: repeat(2, auto);
         width: 100%;
@@ -270,9 +270,20 @@ nav{
     .formatOpV{
         width: 97% !important; 
     }
+    .convertToolsCnt form{
+        grid-template-columns: auto;
+        grid-template-rows: auto auto;
+        grid-gap: 1rem;
+    }
+    .convertToolsCnt form div{
+        width: 100%;
+    }
 }
 @media screen and (max-width:460px){
     .toolsCnt{
         grid-template-columns: repeat(1, auto);
+    }
+    .convertToolsCnt form div label {
+        padding: 0;
     }
 }
